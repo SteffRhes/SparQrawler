@@ -61,10 +61,10 @@ neo4j.bat console
 
 If it's your first time starting neo4j, you must change the default password. Do this via the web-UI on localhost:7474
 
-Then go to the target folder of SparQrawler where you find an executable jar file, run this with:
+Then in the target folder of SparQrawler you find an executable jar file, run this with:
 
 ```
-java -jar target/SparQrawler-0.1-jar-with-dependencies.jar 
+java -jar SparQrawler-0.1-jar-with-dependencies.jar 
 ```
 
 After launching you would type in the necesseray values (triplestore URL, neo4j user and password (assuming localhost!), after which the sparql query would be typed in.
