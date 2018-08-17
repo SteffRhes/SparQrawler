@@ -41,6 +41,7 @@ Note: SparQrawler only runs through rdf nodes which come from a result set of a 
 
 * Java 8 ( succesfully tested with 1.8.0_161 and 1.8.0_181 )
 * neo4j ( succesfully tested with 3.4.5 on both Linux and Windows )
+Download the community edition here: https://neo4j.com/download-center/#releases
 
 ### Running the pre-combiled executable
 
@@ -57,6 +58,8 @@ for Windows:
 ```
 neo4j.bat console 
 ```
+
+If it's your first time starting neo4j, you must change the default password. Do this via the web-UI on localhost:7474
 
 Then go to the target folder of SparQrawler where you find an executable jar file, run this with:
 
