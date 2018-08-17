@@ -17,14 +17,6 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
 
-//        System.out.println("Options: " +
-//                "\n run [sparql query] (runs the typed in sparql query or in the case of no argument being passed, run the pre-defined query)" +
-//                "\n list [group identifier] (lists all the nodes contained in group with given identifier" +
-//                "\n show [group identifier] (shows all relations from group with given identifier)" +
-//                "\n expand [group identifier] (expands all relations and the groups they are relating to from the group with given identifier)");
-
-
-
         System.out.print("URL of virtuoso instance: ");
         virtuosoURL = scanner.nextLine();
 
@@ -33,11 +25,6 @@ public class Main {
 
         System.out.print("Password for local neo4 instance: ");
         String passwordNeo4j = scanner.nextLine();
-
-        // testing values
-//        virtuosoURL = "http://localhost:8890/sparql";
-//        String userNeo4j = "neo4j"; //ToDo
-//        String passwordNeo4j = "password"; //ToDo
 
         neo4jDriver = GraphDatabase.driver(
                 "bolt://127.0.0.1:7687", AuthTokens.basic(userNeo4j, passwordNeo4j));
@@ -52,10 +39,6 @@ public class Main {
             if (input.equals(";")) {
                 try {
                     execute(query);
-
-                    // testing value
-//                    execute("select * where { ?s ?p ?o } limit 10");
-
                     System.out.println("\nType in sparql-query (end query with ';' in a single new line, ';;' to exit the program) :");
 
                 } catch (Exception e) {
