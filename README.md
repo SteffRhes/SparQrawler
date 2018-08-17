@@ -66,6 +66,18 @@ java -jar target/SparQrawler-0.1-jar-with-dependencies.jar
 
 After launching you would type in the necesseray values (triplestore URL, neo4j user and password (assuming localhost!), after which the sparql query would be typed in.
 
+
+### Interpretation of result in neo4j and in terminal
+
+In the neo4j web browser for reasons of compactness, the individual nodes are not saved. What you see in neo4j then is:
+
+* Groups. Each node in neo4j represents a group of rdf nodes
+* Number of nodes in groups. This is used as label to be displayed in neo4j
+* Hovering with the mouse over nodes in neo4j: the defining neighbourhood of a group is displayed and if the group only contains one rdf node this single node is displayed.
+* Hovering with the mouse over relations in neo4j: the count of this relation between the respective groups
+
+In the console after the grouping and persisting data to neo4j is done, a summary of all groups is printed (and their contained nodes).
+
 ## How to compile
 
 If you want to compile it yourself then use maven to do so, in the root directory of SparQrawler where there is the pom.xml file, run
