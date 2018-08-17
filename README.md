@@ -8,18 +8,22 @@ SparQrawler is a rdf graph compression tool, which takes as input a sparql query
 The compression algorithm works by grouping together nodes which have identical 'relational neighbourhoods' -  which is the collection of their outgoing and incoming relations in addition to the number of occurrences of each relation. Once two or more nodes have the same neighbourhood (e.g. two outgoing 'p' relations and one incoming 'q' relation) then they are grouped together and the individual relations of each node are transfered to their respective group. 
 
 As an example assume an rdf graph as displayed now in nquad syntax:
+```
 <a> <p> <x> .
 <b> <p> <x> .
 <y> <q> <a> .
 <z> <q> <b> .
-<x> <r> <x> -
+<x> <r> <x> .
+```
 
 This would result in three groups:
+
 [a,b] because both a and b have each one outgoing 'p' and one incomig 'q'
 [y,z] because both y and z have each one outgoing 'q' 
 [x] because x has one outgoing r and two incoming 'p'
 
 And these groups would have the following relations with each other:
+
 [y,z]--q(2)->[a,b]--p(2)->[x]--r(1)->[x]
 
 Note: SparQrawler only runs through rdf nodes which come from a result set of a give sparql-query. That means that the neighbourhood of a given rdf node can be smaller than in the triplestore because only relations coming from the sparql-result are analysed.
