@@ -69,8 +69,19 @@ java -jar SparQrawler-0.1-jar-with-dependencies.jar
 
 After launching you would type in the necesseray values (triplestore URL, neo4j user and password (assuming localhost!), after which the sparql query would be typed in.
 
+You can use multiple lines by just inserting enters, once done you can execute the sparql query then by entering a new line where you would only type in a single semicolon ';'. 
+
+To quit SparQrawler enter two semicolons ';;' in a single new line.
+
 
 ### Interpretation of result in neo4j and in terminal
+
+Log into neo4j with your browser by going to localhost:7474
+
+Return all data with
+```
+match (n) return n
+```
 
 In the neo4j web browser for reasons of compactness, the individual nodes are not saved. What you see in neo4j then is:
 

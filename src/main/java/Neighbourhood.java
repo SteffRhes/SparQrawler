@@ -2,7 +2,9 @@ import org.apache.jena.rdf.model.RDFNode;
 
 import java.util.HashMap;
 
-
+/**
+ * A data object which encodes the set and the sum of incoming and outgoing relations of a given rdf node or of a group
+ */
 public class Neighbourhood {
 
     public HashMap<RDFNode, Integer> countRelationsIncoming;
