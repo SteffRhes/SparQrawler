@@ -243,7 +243,7 @@ public class Main {
 
         /**
          * start of main loop, where each individual rdf node from the input hashset is being queried and its
-         * neighbourhood examined.
+         * neighbourhood examined. In all of the following code, the subject node of a given triple is the node n.
          *
          * Important note: For each node, only its relations as subject to its objects are being saved into groups which
          * are generated on the fly as well (if needed). By only encoding group-relations in the format of
@@ -299,7 +299,7 @@ public class Main {
                 nRelSubject = qsSubject.get("?nRelSubject");
 
                 /**
-                 *2.) calculates the neighbourhood of the individual rdf nodes (both subject and object)
+                 *2.) calculates the neighbourhood of the individual rdf nodes (here of the subject)
                  * if subject n has no neighbourhood yet, create it
                  */
                  if (!nodeToNeighbourhood.containsKey(n)) {
@@ -331,7 +331,8 @@ public class Main {
 
 
 
-                // object group assignment
+                // object group assignment, from here on, the following code will examine in detail
+                // the neighbourhood and grouping of node nObject (the object to node n given a relation)
                 nObject = qsSubject.get("?nObject");
                 if (nObject != null && nodes.contains(nObject)) {
 
@@ -339,12 +340,13 @@ public class Main {
 
 
                     /**
-                     * 2.) calculates the neighbourhood of the individual rdf nodes (both subject and object)
+                     * 2.) calculates the neighbourhood of the individual rdf nodes (here of the object)
                      *
                      * Within the following if branch the neighbourhood of the object node is created (since it
                      * does not exist yet). This duplicates a lot of logic from the neighbourhood creation of the
                      * subject node, but since there are a few dependencies between object and subject and other variables,
-                     * I didn't see a quick way of outsourcing this logic into a smaller dedicated method
+                     * I didn't see a quick way of outsourcing this logic into a smaller dedicated method; 
+                     * should be possible though along some other improvements.
                      */
                     Neighbourhood neighbourhoodObject = nodeToNeighbourhood.get(nObject);
                     if (neighbourhoodObject == null) {
@@ -359,7 +361,10 @@ public class Main {
 
                         /**
                          * This loop now goes throught each line of the sparql result set, which means it iterates over
-                         * each individual relation the node nObject has.
+                         * each individual relation the node nObject itself has to other nodes. This is done
+                         * so that after the main loop for the current subject node n has finished an iteration, 
+                         * what we have then is a guaranteed correct group of n and of group of all its objects it
+                         * is related to.
                          */
                         while (rsObject.hasNext()) {
 
@@ -393,9 +398,8 @@ public class Main {
 
 
 
-
                         /**
-                         * 3.) saves the rdf nodes into a neighbourhood-specific group
+                         * 3.) saves the rdf node (here nObject) into a neighbourhood-specific group
                          *
                          * The following block assigns to the object node nObject its respective neighbourhodd,
                          * and also to the neighbourhood its respective group
@@ -435,7 +439,7 @@ public class Main {
 
 
             /**
-             * 3.) saves the rdf nodes into a neighbourhood-specific group
+             * 3.) saves the rdf node (here n) into a neighbourhood-specific group
              *
              * The following block assigns to the subject node n its respective neighbourhodd,
              * and also to the neighbourhood its respective group
@@ -454,7 +458,8 @@ public class Main {
             }
 
             /**
-             * 4.) copies the relations of the nodes to their respective groups
+             * 4.) saves the relations (from node n to all its objects, saved temporarily before into a list) 
+             * into the subject group.
              */
             groupSubject.addRelation(currentGroupRelations);
             groupsSet.add(groupSubject);
